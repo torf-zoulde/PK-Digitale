@@ -161,34 +161,51 @@ if (btnContact && formContact) {
 }
 
 // ===================================
-// LOGIN ADMIN → FIREBASE AUTH
+// LOGIN ADMIN FIREBASE
 // ===================================
+
 const loginForm = document.getElementById('login-form');
 const errorMessage = document.getElementById('error-message');
 const errorText = document.getElementById('error-text');
 const loadingIndicator = document.getElementById('loading-indicator');
+const togglePassword = document.getElementById('toggle-password');
+
+if (togglePassword) {
+  togglePassword.addEventListener('click', () => {
+    const passwordInput = document.getElementById('password');
+    const icon = togglePassword.querySelector('i');
+    passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+    icon.classList.toggle('fa-eye');
+    icon.classList.toggle('fa-eye-slash');
+  });
+}
 
 if (loginForm) {
-    loginForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
+  loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-        errorMessage.style.display = 'none';
-        loadingIndicator.style.display = 'flex';
+    errorMessage.style.display = 'none';
+    loadingIndicator.style.display = 'flex';
 
-        const email = document.getElementById('username').value.trim();
-        const password = document.getElementById('password').value.trim();
+    const email = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
 
-        try {
-            await signInWithEmailAndPassword(auth, email, password);
-            window.location.href = "Messages.html";
-        } catch (error) {
-            errorText.textContent = "Identifiants incorrects";
-            errorMessage.style.display = 'flex';
-        } finally {
-            loadingIndicator.style.display = 'none';
-        }
-    });
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+
+      // ✅ REDIRECTION CORRECTE
+      window.location.href = 'Message.html';
+
+    } catch (err) {
+      console.error(err);
+      errorText.textContent = 'Email ou mot de passe incorrect';
+      errorMessage.style.display = 'flex';
+    } finally {
+      loadingIndicator.style.display = 'none';
+    }
+  });
 }
+
 
 // ===================================
 // NOTIFICATION
