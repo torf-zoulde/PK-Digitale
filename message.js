@@ -1,8 +1,3 @@
-// ===================================
-// IMPORT FIREBASE
-// ===================================
-import { db } from './firebase.js';
-import { collection, getDocs, doc, updateDoc, deleteDoc, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js";
 
 // ===================================
 // CANVAS BACKGROUND
