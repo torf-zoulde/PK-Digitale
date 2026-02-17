@@ -180,7 +180,7 @@ if (loginForm) {
 
         try {
             await signInWithEmailAndPassword(auth, email, password);
-            window.location.href = "Admin.html";
+            window.location.href = "Messages.html";
         } catch (error) {
             errorText.textContent = "Identifiants incorrects";
             errorMessage.style.display = 'flex';
