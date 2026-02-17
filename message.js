@@ -1,3 +1,11 @@
+// ===================================
+// IMPORTS FIREBASE
+// ===================================
+import { db } from './firebase.js';
+import {
+    collection, getDocs, updateDoc, deleteDoc,
+    orderBy, query, doc
+} from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
 // ===================================
 // CANVAS BACKGROUND
@@ -44,10 +52,7 @@ if (canvas) {
 
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => {
-            p.update();
-            p.draw();
-        });
+        particles.forEach(p => { p.update(); p.draw(); });
         for (let i = 0; i < particles.length; i++) {
             for (let j = i + 1; j < particles.length; j++) {
                 const dx = particles[i].x - particles[j].x;
@@ -113,7 +118,11 @@ function showNotification(message, type = 'info') {
     document.body.appendChild(notif);
 
     setTimeout(() => { notif.style.transform = 'translateX(0)'; notif.style.opacity = '1'; }, 10);
-    setTimeout(() => { notif.style.transform = 'translateX(400px)'; notif.style.opacity = '0'; setTimeout(() => notif.remove(), 300); }, 5000);
+    setTimeout(() => {
+        notif.style.transform = 'translateX(400px)';
+        notif.style.opacity = '0';
+        setTimeout(() => notif.remove(), 300);
+    }, 5000);
 }
 
 // ===================================
@@ -146,7 +155,7 @@ async function loadMessages() {
         const messagesCol = collection(db, "messages");
         const q = query(messagesCol, orderBy("createdAt", "desc"));
         const snapshot = await getDocs(q);
-        messagesData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        messagesData = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
         displayMessages(messagesData);
         updateStats();
     } catch (err) {
@@ -156,7 +165,7 @@ async function loadMessages() {
 }
 
 // ===================================
-// DISPLAY MESSAGES
+// AFFICHER LES MESSAGES
 // ===================================
 function displayMessages(messages) {
     if (!messagesContainer) return;
@@ -179,7 +188,7 @@ function displayMessages(messages) {
                         <span>${date}</span>
                     </div>
                     <p class="message-subject">${m.sujet || 'Sans sujet'}</p>
-                    <p class="message-preview">${(m.message || '').substring(0,120)}...</p>
+                    <p class="message-preview">${(m.message || '').substring(0, 120)}...</p>
                     <small><i class="fas fa-envelope"></i> ${m.email || 'Email inconnu'}</small>
                 </div>
             </div>
@@ -201,7 +210,9 @@ function openMessageModal(id) {
     document.getElementById('detail-nom').textContent = currentMessage.nom || 'Nom inconnu';
     document.getElementById('detail-email').textContent = currentMessage.email || 'Email inconnu';
     document.getElementById('detail-sujet').textContent = currentMessage.sujet || 'Pas de sujet';
-    document.getElementById('detail-date').textContent = currentMessage.createdAt ? new Date(currentMessage.createdAt.seconds*1000).toLocaleString('fr-FR') : 'Date inconnue';
+    document.getElementById('detail-date').textContent = currentMessage.createdAt
+        ? new Date(currentMessage.createdAt.seconds * 1000).toLocaleString('fr-FR')
+        : 'Date inconnue';
     document.getElementById('detail-message').textContent = currentMessage.message || 'Pas de message';
     readStatusText.textContent = currentMessage.lu ? 'Marquer comme non lu' : 'Marquer comme lu';
     responseText.value = '';
@@ -215,11 +226,18 @@ if (closeModalBtn) closeModalBtn.addEventListener('click', () => { messageModal.
 // ===================================
 if (btnToggleRead) btnToggleRead.addEventListener('click', async () => {
     if (!currentMessage) return;
-    const messageRef = doc(db, "messages", currentMessage.id);
-    await updateDoc(messageRef, { lu: !currentMessage.lu });
-    currentMessage.lu = !currentMessage.lu;
-    displayMessages(messagesData);
-    showNotification('Statut mis à jour', 'success');
+    try {
+        const messageRef = doc(db, "messages", currentMessage.id);
+        await updateDoc(messageRef, { lu: !currentMessage.lu });
+        currentMessage.lu = !currentMessage.lu;
+        readStatusText.textContent = currentMessage.lu ? 'Marquer comme non lu' : 'Marquer comme lu';
+        displayMessages(messagesData);
+        updateStats();
+        showNotification('Statut mis à jour', 'success');
+    } catch (err) {
+        console.error(err);
+        showNotification('Erreur lors de la mise à jour', 'error');
+    }
 });
 
 // ===================================
@@ -229,23 +247,34 @@ if (btnDeleteMessage) btnDeleteMessage.addEventListener('click', async () => {
     if (!currentMessage) return;
     const confirmDelete = window.confirm('Voulez-vous supprimer ce message ?');
     if (!confirmDelete) return;
-    await deleteDoc(doc(db, "messages", currentMessage.id));
-    messagesData = messagesData.filter(m => m.id !== currentMessage.id);
-    displayMessages(messagesData);
-    messageModal.style.display = 'none';
-    showNotification('Message supprimé', 'success');
+    try {
+        await deleteDoc(doc(db, "messages", currentMessage.id));
+        messagesData = messagesData.filter(m => m.id !== currentMessage.id);
+        displayMessages(messagesData);
+        updateStats();
+        messageModal.style.display = 'none';
+        showNotification('Message supprimé', 'success');
+    } catch (err) {
+        console.error(err);
+        showNotification('Erreur lors de la suppression', 'error');
+    }
 });
+
+// ===================================
+// ACTUALISER
+// ===================================
+if (btnRefresh) btnRefresh.addEventListener('click', () => loadMessages());
 
 // ===================================
 // RECHERCHE & FILTRES
 // ===================================
 if (searchInput) searchInput.addEventListener('input', () => {
-    const query = searchInput.value.toLowerCase();
+    const q = searchInput.value.toLowerCase();
     displayMessages(applyFilter(messagesData.filter(m =>
-        (m.nom||'').toLowerCase().includes(query) ||
-        (m.email||'').toLowerCase().includes(query) ||
-        (m.sujet||'').toLowerCase().includes(query) ||
-        (m.message||'').toLowerCase().includes(query)
+        (m.nom || '').toLowerCase().includes(q) ||
+        (m.email || '').toLowerCase().includes(q) ||
+        (m.sujet || '').toLowerCase().includes(q) ||
+        (m.message || '').toLowerCase().includes(q)
     )));
 });
 
@@ -273,7 +302,7 @@ function updateStats() {
     const unread = total - read;
     const today = messagesData.filter(m => {
         if (!m.createdAt) return false;
-        const d = new Date(m.createdAt.seconds*1000);
+        const d = new Date(m.createdAt.seconds * 1000);
         const now = new Date();
         return d.toDateString() === now.toDateString();
     }).length;
@@ -282,6 +311,107 @@ function updateStats() {
     if (statUnread) statUnread.textContent = unread;
     if (statToday) statToday.textContent = today;
 }
+
+// ===================================
+// MENU ITEMS ACTIONS
+// ===================================
+const menuAllData = document.getElementById('menu-all-data');
+const menuSettings = document.getElementById('menu-settings');
+const menuExport = document.getElementById('menu-export');
+const allDataModal = document.getElementById('all-data-modal');
+const closeAllData = document.getElementById('close-all-data');
+const settingsModal = document.getElementById('settings-modal');
+const closeSettings = document.getElementById('close-settings');
+
+if (menuAllData && allDataModal) {
+    menuAllData.addEventListener('click', () => {
+        allDataModal.style.display = 'flex';
+        sideMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
+        // Afficher les données dans un tableau
+        const container = document.getElementById('data-table-container');
+        if (messagesData.length === 0) {
+            container.innerHTML = '<p style="color:white;text-align:center">Aucune donnée disponible</p>';
+            return;
+        }
+        let html = '<table style="width:100%;border-collapse:collapse;color:white;font-size:0.85rem">';
+        html += '<thead><tr style="background:rgba(255,255,255,0.1)">';
+        ['Nom', 'Email', 'Sujet', 'Date', 'Lu'].forEach(h => {
+            html += `<th style="padding:10px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.2)">${h}</th>`;
+        });
+        html += '</tr></thead><tbody>';
+        messagesData.forEach(m => {
+            const date = m.createdAt ? new Date(m.createdAt.seconds * 1000).toLocaleString('fr-FR') : '-';
+            html += `<tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
+                <td style="padding:10px">${m.nom || '-'}</td>
+                <td style="padding:10px">${m.email || '-'}</td>
+                <td style="padding:10px">${m.sujet || '-'}</td>
+                <td style="padding:10px">${date}</td>
+                <td style="padding:10px">${m.lu ? '✅' : '📩'}</td>
+            </tr>`;
+        });
+        html += '</tbody></table>';
+        container.innerHTML = html;
+    });
+}
+
+if (closeAllData && allDataModal) closeAllData.addEventListener('click', () => { allDataModal.style.display = 'none'; });
+
+if (menuSettings && settingsModal) {
+    menuSettings.addEventListener('click', () => {
+        settingsModal.style.display = 'flex';
+        sideMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
+    });
+}
+
+if (closeSettings && settingsModal) closeSettings.addEventListener('click', () => { settingsModal.style.display = 'none'; });
+
+// Changer mot de passe
+const changePasswordForm = document.getElementById('change-password-form');
+if (changePasswordForm) {
+    changePasswordForm.addEventListener('submit', async e => {
+        e.preventDefault();
+        const newPassword = document.getElementById('new-password').value;
+        const confirmPass = document.getElementById('confirm-password').value;
+        if (newPassword !== confirmPass) {
+            showNotification('Les mots de passe ne correspondent pas', 'error');
+            return;
+        }
+        showNotification('Fonctionnalité bientôt disponible', 'info');
+        settingsModal.style.display = 'none';
+    });
+}
+
+// Export des données
+if (menuExport) {
+    menuExport.addEventListener('click', () => {
+        sideMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
+        if (messagesData.length === 0) { showNotification('Aucune donnée à exporter', 'error'); return; }
+        const headers = ['Nom', 'Email', 'Sujet', 'Message', 'Date', 'Lu'];
+        const rows = messagesData.map(m => {
+            const date = m.createdAt ? new Date(m.createdAt.seconds * 1000).toLocaleString('fr-FR') : '-';
+            return [m.nom || '', m.email || '', m.sujet || '', (m.message || '').replace(/,/g, ';'), date, m.lu ? 'Oui' : 'Non'];
+        });
+        const csv = [headers, ...rows].map(r => r.join(',')).join('\n');
+        const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `messages_${new Date().toISOString().split('T')[0]}.csv`;
+        a.click();
+        URL.revokeObjectURL(url);
+        showNotification('Export CSV téléchargé !', 'success');
+    });
+}
+
+// Fermer modals en cliquant à l'extérieur
+document.querySelectorAll('.modal').forEach(modal => {
+    modal.addEventListener('click', e => {
+        if (e.target === modal) modal.style.display = 'none';
+    });
+});
 
 // ===================================
 // LOGOUT
