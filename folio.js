@@ -194,7 +194,7 @@ if (loginForm) {
       await signInWithEmailAndPassword(auth, email, password);
 
       // ✅ REDIRECTION CORRECTE
-      window.location.href = 'Message.html';
+      window.location.href = 'Messages.html';
 
     } catch (err) {
       console.error(err);
