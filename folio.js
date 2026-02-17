@@ -30,7 +30,7 @@ export { app, db, auth };
 // ===================================
 // FIREBASE IMPORTS
 // ===================================
-import { db, auth } from "./firebase.js";
+
 
 import {
   collection,
