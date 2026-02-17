@@ -14,77 +14,39 @@
 <body>
     <canvas id="creative-bg"></canvas>
     
-    <!-- HEADER ADMIN -->
     <header class="admin-header">
         <div class="header-left">
             <div class="logo">SK Digitale</div>
             <h2>Gestion des Messages</h2>
         </div>
         <div class="header-right">
-            <button class="btn-menu" id="btn-menu">
-                <i class="fas fa-bars"></i>
-                <span>Menu</span>
-            </button>
-            <div class="user-info">
-                <i class="fas fa-user-shield"></i>
-                <span>Admin</span>
-            </div>
-            <button class="btn-logout" id="btn-logout">
-                <i class="fas fa-sign-out-alt"></i>
-                <span>Déconnexion</span>
-            </button>
+            <button class="btn-menu" id="btn-menu"><i class="fas fa-bars"></i><span>Menu</span></button>
+            <div class="user-info"><i class="fas fa-user-shield"></i><span>Admin</span></div>
+            <button class="btn-logout" id="btn-logout"><i class="fas fa-sign-out-alt"></i><span>Déconnexion</span></button>
         </div>
     </header>
 
-    <!-- MENU LATÉRAL -->
     <div class="side-menu" id="side-menu">
         <div class="side-menu-header">
             <h3><i class="fas fa-cog"></i> Menu</h3>
-            <button class="close-menu" id="close-menu">
-                <i class="fas fa-times"></i>
-            </button>
+            <button class="close-menu" id="close-menu"><i class="fas fa-times"></i></button>
         </div>
         <div class="side-menu-content">
-            <button class="menu-item" id="menu-dashboard">
-                <i class="fas fa-chart-line"></i>
-                <span>Tableau de bord</span>
-            </button>
-            <button class="menu-item" id="menu-all-data">
-                <i class="fas fa-database"></i>
-                <span>Toutes les données</span>
-            </button>
-            <button class="menu-item" id="menu-settings">
-                <i class="fas fa-key"></i>
-                <span>Changer mot de passe</span>
-            </button>
-            <button class="menu-item" id="menu-export">
-                <i class="fas fa-download"></i>
-                <span>Exporter les données</span>
-            </button>
+            <button class="menu-item" id="menu-dashboard"><i class="fas fa-chart-line"></i><span>Tableau de bord</span></button>
+            <button class="menu-item" id="menu-all-data"><i class="fas fa-database"></i><span>Toutes les données</span></button>
+            <button class="menu-item" id="menu-settings"><i class="fas fa-key"></i><span>Changer mot de passe</span></button>
+            <button class="menu-item" id="menu-export"><i class="fas fa-download"></i><span>Exporter les données</span></button>
         </div>
     </div>
 
     <div class="menu-overlay" id="menu-overlay"></div>
 
-    <!-- MAIN CONTENT -->
     <main class="admin-main">
         <section class="stats-section">
-            <div class="stat-card">
-                <div class="stat-icon total"><i class="fas fa-envelope"></i></div>
-                <div class="stat-info"><h3 id="stat-total">0</h3><p>Total Messages</p></div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon unread"><i class="fas fa-envelope-open"></i></div>
-                <div class="stat-info"><h3 id="stat-unread">0</h3><p>Non Lus</p></div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon read"><i class="fas fa-check-circle"></i></div>
-                <div class="stat-info"><h3 id="stat-read">0</h3><p>Lus</p></div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon today"><i class="fas fa-calendar-day"></i></div>
-                <div class="stat-info"><h3 id="stat-today">0</h3><p>Aujourd'hui</p></div>
-            </div>
+            <div class="stat-card"><div class="stat-icon total"><i class="fas fa-envelope"></i></div><div class="stat-info"><h3 id="stat-total">0</h3><p>Total Messages</p></div></div>
+            <div class="stat-card"><div class="stat-icon unread"><i class="fas fa-envelope-open"></i></div><div class="stat-info"><h3 id="stat-unread">0</h3><p>Non Lus</p></div></div>
+            <div class="stat-card"><div class="stat-icon read"><i class="fas fa-check-circle"></i></div><div class="stat-info"><h3 id="stat-read">0</h3><p>Lus</p></div></div>
+            <div class="stat-card"><div class="stat-icon today"><i class="fas fa-calendar-day"></i></div><div class="stat-info"><h3 id="stat-today">0</h3><p>Aujourd'hui</p></div></div>
         </section>
 
         <section class="filters-section">
@@ -93,26 +55,15 @@
                 <input type="text" id="search-input" placeholder="Rechercher par nom, email ou sujet...">
             </div>
             <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">
-                    <i class="fas fa-list"></i> Tous
-                </button>
-                <button class="filter-btn" data-filter="unread">
-                    <i class="fas fa-envelope"></i> Non lus
-                </button>
-                <button class="filter-btn" data-filter="read">
-                    <i class="fas fa-envelope-open"></i> Lus
-                </button>
+                <button class="filter-btn active" data-filter="all"><i class="fas fa-list"></i> Tous</button>
+                <button class="filter-btn" data-filter="unread"><i class="fas fa-envelope"></i> Non lus</button>
+                <button class="filter-btn" data-filter="read"><i class="fas fa-envelope-open"></i> Lus</button>
             </div>
-            <button class="btn-refresh" id="btn-refresh">
-                <i class="fas fa-sync-alt"></i> Actualiser
-            </button>
+            <button class="btn-refresh" id="btn-refresh"><i class="fas fa-sync-alt"></i> Actualiser</button>
         </section>
 
         <section class="messages-container" id="messages-container">
-            <div class="loading">
-                <i class="fas fa-spinner fa-spin"></i>
-                <p>Chargement des messages...</p>
-            </div>
+            <div class="loading"><i class="fas fa-spinner fa-spin"></i><p>Chargement des messages...</p></div>
         </section>
     </main>
 
@@ -125,44 +76,21 @@
             </div>
             <div class="modal-body">
                 <div class="message-details">
-                    <div class="detail-row">
-                        <div class="detail-label"><i class="fas fa-user"></i> Nom</div>
-                        <div class="detail-value" id="detail-nom"></div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-label"><i class="fas fa-envelope"></i> Email</div>
-                        <div class="detail-value" id="detail-email"></div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-label"><i class="fas fa-tag"></i> Sujet</div>
-                        <div class="detail-value" id="detail-sujet"></div>
-                    </div>
-                    <div class="detail-row">
-                        <div class="detail-label"><i class="fas fa-clock"></i> Date</div>
-                        <div class="detail-value" id="detail-date"></div>
-                    </div>
-                    <div class="detail-row full">
-                        <div class="detail-label"><i class="fas fa-comment"></i> Message</div>
-                        <div class="detail-value message-text" id="detail-message"></div>
-                    </div>
+                    <div class="detail-row"><div class="detail-label"><i class="fas fa-user"></i> Nom</div><div class="detail-value" id="detail-nom"></div></div>
+                    <div class="detail-row"><div class="detail-label"><i class="fas fa-envelope"></i> Email</div><div class="detail-value" id="detail-email"></div></div>
+                    <div class="detail-row"><div class="detail-label"><i class="fas fa-tag"></i> Sujet</div><div class="detail-value" id="detail-sujet"></div></div>
+                    <div class="detail-row"><div class="detail-label"><i class="fas fa-clock"></i> Date</div><div class="detail-value" id="detail-date"></div></div>
+                    <div class="detail-row full"><div class="detail-label"><i class="fas fa-comment"></i> Message</div><div class="detail-value message-text" id="detail-message"></div></div>
                 </div>
-
                 <div class="response-section" id="response-section">
                     <h3><i class="fas fa-reply"></i> Répondre au message</h3>
                     <textarea id="response-text" rows="6" placeholder="Écrivez votre réponse ici..."></textarea>
-                    <button class="btn-send-response" id="btn-send-response">
-                        <i class="fas fa-paper-plane"></i> Envoyer la réponse
-                    </button>
+                    <button class="btn-send-response" id="btn-send-response"><i class="fas fa-paper-plane"></i> Envoyer la réponse</button>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn-action" id="btn-toggle-read">
-                    <i class="fas fa-eye"></i>
-                    <span id="read-status-text">Marquer comme lu</span>
-                </button>
-                <button class="btn-action btn-delete" id="btn-delete-message">
-                    <i class="fas fa-trash"></i> Supprimer
-                </button>
+                <button class="btn-action" id="btn-toggle-read"><i class="fas fa-eye"></i><span id="read-status-text">Marquer comme lu</span></button>
+                <button class="btn-action btn-delete" id="btn-delete-message"><i class="fas fa-trash"></i> Supprimer</button>
             </div>
         </div>
     </div>
@@ -191,28 +119,38 @@
             </div>
             <div class="modal-body">
                 <form id="change-password-form">
-                    <div class="form-group">
-                        <label><i class="fas fa-lock"></i> Mot de passe actuel</label>
-                        <input type="password" id="current-password" required>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-key"></i> Nouveau mot de passe</label>
-                        <input type="password" id="new-password" required>
-                    </div>
-                    <div class="form-group">
-                        <label><i class="fas fa-check-circle"></i> Confirmer le mot de passe</label>
-                        <input type="password" id="confirm-password" required>
-                    </div>
-                    <button type="submit" class="btn-submit">
-                        <i class="fas fa-save"></i> Enregistrer
-                    </button>
+                    <div class="form-group"><label><i class="fas fa-lock"></i> Mot de passe actuel</label><input type="password" id="current-password" required></div>
+                    <div class="form-group"><label><i class="fas fa-key"></i> Nouveau mot de passe</label><input type="password" id="new-password" required></div>
+                    <div class="form-group"><label><i class="fas fa-check-circle"></i> Confirmer</label><input type="password" id="confirm-password" required></div>
+                    <button type="submit" class="btn-submit"><i class="fas fa-save"></i> Enregistrer</button>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- CORRECTION : un seul script, message.js importe firebase.js lui-même -->
-    <script type="module" src="message.js"></script>
+   <!-- =============================================
+        FIREBASE CDN (version compat = pas de import)
+        ============================================= -->
+   <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
+   <script>
+     // ⚡ REMPLACE ICI PAR TES VRAIES CLÉS FIREBASE
+     const firebaseConfig = {
+       apiKey: "TON_API_KEY",
+       authDomain: "TON_PROJECT.firebaseapp.com",
+       projectId: "TON_PROJECT_ID",
+       storageBucket: "TON_PROJECT.appspot.com",
+       messagingSenderId: "TON_SENDER_ID",
+       appId: "TON_APP_ID"
+     };
+     firebase.initializeApp(firebaseConfig);
+     window.db   = firebase.firestore();
+     window.auth = firebase.auth();
+     window.firebaseFirestore = firebase.firestore;
+     window.firebaseAuth      = firebase.auth;
+   </script>
+   <script src="message.js"></script>
 
 </body>
 </html>

@@ -1,11 +1,4 @@
 // ===================================
-// IMPORTS FIREBASE
-// ===================================
-import { db, auth } from './firebase.js';
-import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
-import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-auth.js";
-
-// ===================================
 // CANVAS BACKGROUND ANIMATION
 // ===================================
 const canvas = document.getElementById('creative-bg');
@@ -144,6 +137,25 @@ const skillObserver = new IntersectionObserver(entries => {
 skillBars.forEach(bar => skillObserver.observe(bar));
 
 // ===================================
+// NOTIFICATIONS
+// ===================================
+function showNotification(message, type = 'info') {
+    const existing = document.querySelector('.notification');
+    if (existing) existing.remove();
+    const notif = document.createElement('div');
+    notif.className = `notification notification-${type}`;
+    const icon = type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle';
+    notif.innerHTML = `<i class="fas ${icon}"></i><span>${message}</span>`;
+    document.body.appendChild(notif);
+    setTimeout(() => { notif.style.transform = 'translateX(0)'; notif.style.opacity = '1'; }, 10);
+    setTimeout(() => {
+        notif.style.transform = 'translateX(400px)';
+        notif.style.opacity = '0';
+        setTimeout(() => notif.remove(), 300);
+    }, 5000);
+}
+
+// ===================================
 // FORMULAIRE CONTACT FIRESTORE
 // ===================================
 const btnContact = document.getElementById('btn-contact');
@@ -174,7 +186,9 @@ if (btnContact && formContact) {
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
 
         try {
-            await addDoc(collection(db, 'messages'), {
+            // db est disponible globalement grâce aux scripts Firebase dans le HTML
+            const { collection, addDoc, serverTimestamp } = window.firebaseFirestore;
+            await addDoc(collection(window.db, 'messages'), {
                 nom, email, sujet, message,
                 lu: false,
                 createdAt: serverTimestamp()
@@ -191,25 +205,6 @@ if (btnContact && formContact) {
             submitBtn.innerHTML = originalBtnText;
         }
     });
-}
-
-// ===================================
-// NOTIFICATIONS
-// ===================================
-function showNotification(message, type = 'info') {
-    const existing = document.querySelector('.notification');
-    if (existing) existing.remove();
-    const notif = document.createElement('div');
-    notif.className = `notification notification-${type}`;
-    const icon = type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle';
-    notif.innerHTML = `<i class="fas ${icon}"></i><span>${message}</span>`;
-    document.body.appendChild(notif);
-    setTimeout(() => { notif.style.transform = 'translateX(0)'; notif.style.opacity = '1'; }, 10);
-    setTimeout(() => {
-        notif.style.transform = 'translateX(400px)';
-        notif.style.opacity = '0';
-        setTimeout(() => notif.remove(), 300);
-    }, 5000);
 }
 
 // ===================================
@@ -245,11 +240,11 @@ if (loginForm) {
         const username = document.getElementById('username').value.trim();
         const password = document.getElementById('password').value.trim();
         try {
-            await signInWithEmailAndPassword(auth, username, password);
+            const { signInWithEmailAndPassword } = window.firebaseAuth;
+            await signInWithEmailAndPassword(window.auth, username, password);
             window.location.href = 'Messages.html';
         } catch (err) {
             console.error(err);
-            // CORRECTION : apostrophe typographique remplacée
             errorText.textContent = "Nom d'utilisateur ou mot de passe incorrect";
             errorMessage.style.display = 'flex';
         } finally {

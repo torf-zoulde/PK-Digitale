@@ -1,23 +1,10 @@
 // ===================================
-// IMPORTS FIREBASE
-// ===================================
-import { db } from './firebase.js';
-import {
-    collection, getDocs, updateDoc, deleteDoc,
-    orderBy, query, doc
-} from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
-
-// ===================================
 // CANVAS BACKGROUND
 // ===================================
 const canvas = document.getElementById('creative-bg');
 if (canvas) {
     const ctx = canvas.getContext('2d');
-
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
+    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
@@ -46,9 +33,7 @@ if (canvas) {
         }
     }
 
-    for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
-    }
+    for (let i = 0; i < particleCount; i++) particles.push(new Particle());
 
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -80,7 +65,6 @@ let messagesData = [];
 let currentMessage = null;
 let currentFilter = 'all';
 
-// DOM Elements
 const messagesContainer = document.getElementById('messages-container');
 const searchInput = document.getElementById('search-input');
 const filterButtons = document.querySelectorAll('.filter-btn');
@@ -97,8 +81,6 @@ const btnDeleteMessage = document.getElementById('btn-delete-message');
 const responseText = document.getElementById('response-text');
 const btnSendResponse = document.getElementById('btn-send-response');
 const readStatusText = document.getElementById('read-status-text');
-
-// Menu latéral
 const btnMenu = document.getElementById('btn-menu');
 const sideMenu = document.getElementById('side-menu');
 const closeMenu = document.getElementById('close-menu');
@@ -110,13 +92,11 @@ const menuOverlay = document.getElementById('menu-overlay');
 function showNotification(message, type = 'info') {
     const existing = document.querySelector('.notification');
     if (existing) existing.remove();
-
     const notif = document.createElement('div');
     notif.className = `notification notification-${type}`;
     const icon = type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle';
     notif.innerHTML = `<i class="fas ${icon}"></i><span>${message}</span>`;
     document.body.appendChild(notif);
-
     setTimeout(() => { notif.style.transform = 'translateX(0)'; notif.style.opacity = '1'; }, 10);
     setTimeout(() => {
         notif.style.transform = 'translateX(400px)';
@@ -144,15 +124,14 @@ if (btnMenu && sideMenu && closeMenu && menuOverlay) {
 }
 
 // ===================================
-// LOAD MESSAGES FROM FIRESTORE
+// LOAD MESSAGES DEPUIS FIRESTORE
 // ===================================
 async function loadMessages() {
     if (!messagesContainer) return;
-
     messagesContainer.innerHTML = `<div class="loading"><i class="fas fa-spinner fa-spin"></i><p>Chargement des messages...</p></div>`;
-
     try {
-        const messagesCol = collection(db, "messages");
+        const { collection, getDocs, query, orderBy } = window.firebaseFirestore;
+        const messagesCol = collection(window.db, "messages");
         const q = query(messagesCol, orderBy("createdAt", "desc"));
         const snapshot = await getDocs(q);
         messagesData = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
@@ -173,7 +152,6 @@ function displayMessages(messages) {
         messagesContainer.innerHTML = `<div class="empty-state"><i class="fas fa-inbox"></i><h3>Aucun message trouvé</h3></div>`;
         return;
     }
-
     messagesContainer.innerHTML = messages.map(m => {
         m.lu = m.lu ?? false;
         const date = m.createdAt ? new Date(m.createdAt.seconds * 1000).toLocaleString('fr-FR') : 'Date inconnue';
@@ -206,16 +184,14 @@ function displayMessages(messages) {
 function openMessageModal(id) {
     currentMessage = messagesData.find(m => m.id === id);
     if (!currentMessage) { showNotification('Message introuvable', 'error'); return; }
-
     document.getElementById('detail-nom').textContent = currentMessage.nom || 'Nom inconnu';
     document.getElementById('detail-email').textContent = currentMessage.email || 'Email inconnu';
     document.getElementById('detail-sujet').textContent = currentMessage.sujet || 'Pas de sujet';
     document.getElementById('detail-date').textContent = currentMessage.createdAt
-        ? new Date(currentMessage.createdAt.seconds * 1000).toLocaleString('fr-FR')
-        : 'Date inconnue';
+        ? new Date(currentMessage.createdAt.seconds * 1000).toLocaleString('fr-FR') : 'Date inconnue';
     document.getElementById('detail-message').textContent = currentMessage.message || 'Pas de message';
     readStatusText.textContent = currentMessage.lu ? 'Marquer comme non lu' : 'Marquer comme lu';
-    responseText.value = '';
+    if (responseText) responseText.value = '';
     if (messageModal) messageModal.style.display = 'flex';
 }
 
@@ -227,7 +203,8 @@ if (closeModalBtn) closeModalBtn.addEventListener('click', () => { messageModal.
 if (btnToggleRead) btnToggleRead.addEventListener('click', async () => {
     if (!currentMessage) return;
     try {
-        const messageRef = doc(db, "messages", currentMessage.id);
+        const { doc, updateDoc } = window.firebaseFirestore;
+        const messageRef = doc(window.db, "messages", currentMessage.id);
         await updateDoc(messageRef, { lu: !currentMessage.lu });
         currentMessage.lu = !currentMessage.lu;
         readStatusText.textContent = currentMessage.lu ? 'Marquer comme non lu' : 'Marquer comme lu';
@@ -245,10 +222,10 @@ if (btnToggleRead) btnToggleRead.addEventListener('click', async () => {
 // ===================================
 if (btnDeleteMessage) btnDeleteMessage.addEventListener('click', async () => {
     if (!currentMessage) return;
-    const confirmDelete = window.confirm('Voulez-vous supprimer ce message ?');
-    if (!confirmDelete) return;
+    if (!window.confirm('Voulez-vous supprimer ce message ?')) return;
     try {
-        await deleteDoc(doc(db, "messages", currentMessage.id));
+        const { doc, deleteDoc } = window.firebaseFirestore;
+        await deleteDoc(doc(window.db, "messages", currentMessage.id));
         messagesData = messagesData.filter(m => m.id !== currentMessage.id);
         displayMessages(messagesData);
         updateStats();
@@ -303,8 +280,7 @@ function updateStats() {
     const today = messagesData.filter(m => {
         if (!m.createdAt) return false;
         const d = new Date(m.createdAt.seconds * 1000);
-        const now = new Date();
-        return d.toDateString() === now.toDateString();
+        return d.toDateString() === new Date().toDateString();
     }).length;
     if (statTotal) statTotal.textContent = total;
     if (statRead) statRead.textContent = read;
@@ -313,7 +289,7 @@ function updateStats() {
 }
 
 // ===================================
-// MENU ITEMS ACTIONS
+// MENU ITEMS
 // ===================================
 const menuAllData = document.getElementById('menu-all-data');
 const menuSettings = document.getElementById('menu-settings');
@@ -328,10 +304,9 @@ if (menuAllData && allDataModal) {
         allDataModal.style.display = 'flex';
         sideMenu.classList.remove('active');
         menuOverlay.classList.remove('active');
-        // Afficher les données dans un tableau
         const container = document.getElementById('data-table-container');
         if (messagesData.length === 0) {
-            container.innerHTML = '<p style="color:white;text-align:center">Aucune donnée disponible</p>';
+            container.innerHTML = '<p style="color:white;text-align:center">Aucune donnée</p>';
             return;
         }
         let html = '<table style="width:100%;border-collapse:collapse;color:white;font-size:0.85rem">';
@@ -364,26 +339,8 @@ if (menuSettings && settingsModal) {
         menuOverlay.classList.remove('active');
     });
 }
-
 if (closeSettings && settingsModal) closeSettings.addEventListener('click', () => { settingsModal.style.display = 'none'; });
 
-// Changer mot de passe
-const changePasswordForm = document.getElementById('change-password-form');
-if (changePasswordForm) {
-    changePasswordForm.addEventListener('submit', async e => {
-        e.preventDefault();
-        const newPassword = document.getElementById('new-password').value;
-        const confirmPass = document.getElementById('confirm-password').value;
-        if (newPassword !== confirmPass) {
-            showNotification('Les mots de passe ne correspondent pas', 'error');
-            return;
-        }
-        showNotification('Fonctionnalité bientôt disponible', 'info');
-        settingsModal.style.display = 'none';
-    });
-}
-
-// Export des données
 if (menuExport) {
     menuExport.addEventListener('click', () => {
         sideMenu.classList.remove('active');
@@ -406,11 +363,9 @@ if (menuExport) {
     });
 }
 
-// Fermer modals en cliquant à l'extérieur
+// Fermer modals en cliquant dehors
 document.querySelectorAll('.modal').forEach(modal => {
-    modal.addEventListener('click', e => {
-        if (e.target === modal) modal.style.display = 'none';
-    });
+    modal.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
 });
 
 // ===================================

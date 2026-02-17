@@ -14,10 +14,8 @@
     <canvas id="creative-bg"></canvas>
     
     <div class="floating-particles">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div>
         <div class="particle"></div>
     </div>
     
@@ -45,7 +43,6 @@
                         <span class="input-border"></span>
                     </div>
                 </div>
-
                 <div class="input-wrapper">
                     <div class="input-icon"><i class="fas fa-key"></i></div>
                     <div class="input-field">
@@ -91,15 +88,32 @@
                 </div>
             </div>
         </div>
-        
-        <div class="version-badge">
-            <i class="fas fa-code-branch"></i>
-            <span>v1.0.0</span>
-        </div>
+        <div class="version-badge"><i class="fas fa-code-branch"></i><span>v1.0.0</span></div>
     </div>
 
-    <!-- CORRECTION : un seul script, folio.js importe firebase.js lui-même -->
-    <script type="module" src="folio.js"></script>
+   <!-- =============================================
+        FIREBASE CDN (version compat = pas de import)
+        ============================================= -->
+   <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore-compat.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-auth-compat.js"></script>
+   <script>
+     // ⚡ REMPLACE ICI PAR TES VRAIES CLÉS FIREBASE
+     const firebaseConfig = {
+       apiKey: "TON_API_KEY",
+       authDomain: "TON_PROJECT.firebaseapp.com",
+       projectId: "TON_PROJECT_ID",
+       storageBucket: "TON_PROJECT.appspot.com",
+       messagingSenderId: "TON_SENDER_ID",
+       appId: "TON_APP_ID"
+     };
+     firebase.initializeApp(firebaseConfig);
+     window.db   = firebase.firestore();
+     window.auth = firebase.auth();
+     window.firebaseFirestore = firebase.firestore;
+     window.firebaseAuth      = firebase.auth;
+   </script>
+   <script src="folio.js"></script>
 
 </body>
 </html>
