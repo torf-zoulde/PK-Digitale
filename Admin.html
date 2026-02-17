@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration - SK Digitale</title>
+    <link rel="stylesheet" href="folio.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <canvas id="creative-bg"></canvas>
+    
+    <!-- Particules flottantes décoratives -->
+    <div class="floating-particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+    
+    <div class="login-container">
+        <!-- Carte de connexion avec effet 3D -->
+        <div class="login-box">
+            <!-- En-tête avec animation -->
+            <div class="login-header">
+                <div class="logo-wrapper">
+                    <div class="logo-circle">
+                        <div class="logo-ring"></div>
+                        <div class="logo-ring"></div>
+                        <i class="fas fa-unlock-alt"></i>
+                    </div>
+                </div>
+                <h1 class="title-gradient">Zone d'Administration</h1>
+                <p class="subtitle-text">Système de Gestion SK Digitale</p>
+                <div class="header-divider"></div>
+            </div>
+            
+            <!-- Formulaire de connexion -->
+            <form id="login-form" class="login-form">
+                <div class="input-wrapper">
+                    <div class="input-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div class="input-field">
+                        <label for="username">Identifiant Administrateur</label>
+                        <input type="text" id="username" name="username" placeholder="Saisissez votre identifiant" required autofocus>
+                        <span class="input-border"></span>
+                    </div>
+                </div>
+
+                <div class="input-wrapper">
+                    <div class="input-icon">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <div class="input-field">
+                        <label for="password">Code d'accès sécurisé</label>
+                        <div class="password-container">
+                            <input type="password" id="password" name="password" placeholder="••••••••" required>
+                            <button type="button" class="toggle-password" id="toggle-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <span class="input-border"></span>
+                    </div>
+                </div>
+
+                <!-- Message d'erreur avec animation -->
+                <div id="error-message" class="error-alert" style="display: none;">
+                    <div class="error-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="error-content">
+                        <span id="error-text"></span>
+                    </div>
+                </div>
+
+                <!-- Bouton de connexion avec effet -->
+                <button type="submit" class="btn-login">
+                    <span class="btn-content">
+                        <i class="fas fa-fingerprint"></i>
+                        <span class="btn-text">Authentification</span>
+                    </span>
+                    <span class="btn-shine"></span>
+                </button>
+                
+                <!-- Indicateur de chargement -->
+                <div class="loading-indicator" id="loading-indicator" style="display: none;">
+                    <div class="loading-spinner"></div>
+                    <span>Vérification en cours...</span>
+                </div>
+            </form>
+
+            <!-- Pied de page avec informations -->
+            <div class="login-footer">
+                <div class="security-badge">
+                    <i class="fas fa-shield-virus"></i>
+                    <span>Connexion sécurisée SSL/TLS 256-bit</span>
+                </div>
+                <div class="footer-info">
+                    <span class="info-item">
+                        <i class="fas fa-lock"></i>
+                        Accès réservé
+                    </span>
+                    <span class="info-divider">•</span>
+                    <span class="info-item">
+                        <i class="fas fa-clock"></i>
+                        Session 8h
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Badge de version -->
+        <div class="version-badge">
+            <i class="fas fa-code-branch"></i>
+            <span>v1.0.0</span>
+        </div>
+    </div>
+
+    <script type="module" src="folio.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samson Kpodamakou | Developpeur Web-Administrateur Reseaux & Systèmes</title>
+    <link rel="stylesheet" href="folio.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+   <canvas id="creative-bg"></canvas>
+   
+   <div id="content">
+        <!-- HEADER NAVIGATION -->
+        <header id="header">
+            <div class="menu-btn" id="menuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="logo"><a href="Admin.html" class="btn-admin">
+    <i class="fas fa-user-shield"></i></a> SK Digitale</div>
+
+            <nav class="menu" id="menu">
+                <a href="#apropos" class="menu-link">À propos</a>
+                <a href="#parcours-scolaire" class="menu-link">Parcours</a>
+                <a href="#experiences" class="menu-link">Expériences</a>
+                <a href="#competences-techniques" class="menu-link">Compétences</a>
+                <a href="#projets" class="menu-link">Projets</a>
+                <a href="#cv" class="menu-link">CV</a>
+                <a href="#contact" class="menu-link">Contact</a>
+            </nav>
+        </header>
+
+        <!-- SECTION PRESENTATION -->
+        <section id="presentation">
+            <div class="hero-content">
+                <div class="text-content">
+                    <h1 class="fade-in">Samson Kpodamakou</h1>
+                    <p class="subtitle fade-in">Développeur Web & Mobile</p>
+                    <p class="subtitle fade-in">Administrateur Systèmes & Réseaux</p>
+                    <p class="tagline fade-in">Futur expert en cybersécurité</p>
+                </div>
+                
+                <div id="photo" class="fade-in">
+                    <div class="photo-frame">
+                        <img src="sam.jpg" alt="Photo de Samson Kpodamakou">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION À PROPOS -->
+        <section id="apropos">
+            <div class="section-header">
+                <h2>À propos</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="apropos-content">
+                <p>
+                    Je suis Samson Kpodamakou, étudiant passionné en <strong>Informatique de Gestion</strong> à l'ENEAM. 
+                    Mon parcours est guidé par une fascination profonde pour les technologies et leur capacité à résoudre 
+                    des problèmes complexes.
+                </p>
+                <p>
+                    Actuellement en formation pour devenir <strong>Administrateur Systèmes et Réseaux</strong>, je développe 
+                    continuellement mes compétences en gestion d'infrastructures, sécurité informatique, et développement 
+                    d'applications. Ma curiosité naturelle me pousse à explorer constamment de nouvelles solutions 
+                    informatiques efficaces et sécurisées.
+                </p>
+                <p>
+                    Ma rigueur et mon sens de l'organisation me permettent de mener à bien des projets complexes, 
+                    alliant compétences techniques en programmation et vision stratégique en gestion de projets.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION PARCOURS SCOLAIRE -->
+        <section id="parcours-scolaire">
+            <div class="section-header">
+                <h2>Parcours Scolaire</h2>
+                <div class="accent-line"></div>
+            </div>
+        
+            <!-- Résumé du parcours (toujours visible) -->
+            <div class="dark-box">
+                <p>BAC+2 en Informatique de Gestion, Licence en Administration des Systèmes et Réseaux.</p>
+                <div class="parcours-btn-wrapper">
+                    <button id="btn-voir-parcours" class="btn-voir-parcours">
+                        <i class="fas fa-chevron-down"></i>
+                        Voir plus
+                    </button>
+                </div>
+            </div>
+
+            <!-- Timeline complète (cachée par défaut) -->
+            <div class="timeline" id="parcours-complet" style="display: none; margin-top: 40px;">
+                <div class="timeline-item">
+                    <div class="timeline-date">2026 - Présent</div>
+                    <div class="timeline-content">
+                        <h3>License en Administation des reseaux & Systemes</h3>
+                        <p class="institution">École Nationale d'Économie Appliquée et de Management (ENEAM)</p>
+                        <p class="description">Spécialisation en administration systèmes et réseauxs.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2025 -2026</div>
+                    <div class="timeline-content">
+                        <h3>BAC+2 en Informatique de Gestion</h3>
+                        <p class="institution">École Nationale d'Économie Appliquée et de Management (ENEAM)</p>
+                        <p class="description">Spécialisation en administration systèmes et réseaux, développement d'applications, et gestion de projets informatiques.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2023 - 2024</div>
+                    <div class="timeline-content">
+                        <h3>Baccalauréat Série D</h3>
+                        <p class="institution">Lycée Scientifique</p>
+                        <p class="description">Formation scientifique avec spécialisation en mathématiques et sciences physiques.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">Formations continues</div>
+                    <div class="timeline-content">
+                        <h3>Certifications et Cours</h3>
+                        <ul>
+                            <li>Configuration et gestion de réseaux Cisco</li>
+                            <li>Administration systèmes Linux (Ubuntu, CentOS)</li>
+                            <li>Développement Web Full-Stack</li>
+                            <li>Sécurité informatique et cryptographie</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION EXPERIENCES -->
+        <section id="experiences">
+            <div class="section-header">
+                <h2>Expériences Professionnelles</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="experience-grid">
+                <div class="experience-card">
+                    <div class="exp-header">
+                        <i class="fas fa-network-wired"></i>
+                        <h3>Stage Administrateur Réseau</h3>
+                    </div>
+                    <p class="exp-company">Entreprise XYZ</p>
+                    <p class="exp-date">Juin 2025 - Août 2025</p>
+                    <ul class="exp-tasks">
+                        <li>Installation et configuration de serveurs Linux (Ubuntu Server, CentOS)</li>
+                        <li>Gestion des comptes utilisateurs et politique de sécurité Active Directory</li>
+                        <li>Configuration de pare-feu et monitoring réseau avec Nagios</li>
+                        <li>Mise en place de systèmes de backup automatisés</li>
+                        <li>Documentation technique complète des infrastructures</li>
+                    </ul>
+                </div>
+
+                <div class="experience-card">
+                    <div class="exp-header">
+                        <i class="fas fa-code"></i>
+                        <h3>Projet Développement Web</h3>
+                    </div>
+                    <p class="exp-company">ENEAM - Projet Académique</p>
+                    <p class="exp-date">Mars 2025 - Mai 2025</p>
+                    <ul class="exp-tasks">
+                        <li>Conception et développement d'une application web de gestion de stock</li>
+                        <li>Architecture frontend moderne avec HTML5, CSS3 et JavaScript</li>
+                        <li>Backend développé en Python avec Flask et base de données MySQL</li>
+                        <li>Implémentation d'un système d'authentification sécurisé</li>
+                        <li>Interface responsive et intuitive pour tous les appareils</li>
+                    </ul>
+                </div>
+
+                <div class="experience-card">
+                    <div class="exp-header">
+                        <i class="fas fa-server"></i>
+                        <h3>Assistant Technique IT</h3>
+                    </div>
+                    <p class="exp-company">Centre Informatique ENEAM</p>
+                    <p class="exp-date">Janvier 2025 - Présent</p>
+                    <ul class="exp-tasks">
+                        <li>Support technique niveau 1 et 2 aux étudiants et personnel</li>
+                        <li>Maintenance préventive du parc informatique</li>
+                        <li>Installation et configuration de postes de travail</li>
+                        <li>Résolution de problèmes réseau et connectivité</li>
+                        <li>Formation basique des utilisateurs aux outils numériques</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION COMPETENCES TECHNIQUES -->
+        <section id="competences-techniques">
+            <div class="section-header">
+                <h2>Compétences Techniques</h2>
+                <div class="accent-line"></div>
+            </div>
+
+            <div class="skills-container">
+                <div class="skill-category">
+                    <div class="category-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Programmation</h3>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <i class="fab fa-python"></i>
+                                <span>Python</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <i class="fas fa-database"></i>
+                                <span>SQL</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <i class="fab fa-html5"></i>
+                                <span>HTML5</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <i class="fab fa-css3-alt"></i>
+                                <span>CSS3</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <i class="fab fa-js"></i>
+                                <span>JavaScript</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="category-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>Réseaux & Systèmes</h3>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <i class="fas fa-network-wired"></i>
+                                <span>Cisco Networking</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <i class="fab fa-linux"></i>
+                                <span>Linux</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <i class="fab fa-windows"></i>
+                                <span>Windows Server</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Sécurité Réseau</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="category-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Outils & Technologies</h3>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <i class="fab fa-git-alt"></i>
+                                <span>Git & GitHub</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <i class="fas fa-database"></i>
+                                <span>MySQL / PostgreSQL</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <i class="fab fa-docker"></i>
+                                <span>Docker</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <i class="fas fa-terminal"></i>
+                                <span>Bash Scripting</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="category-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>Bureautique</h3>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <i class="fas fa-file-excel"></i>
+                                <span>Excel</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <i class="fas fa-file-word"></i>
+                                <span>Word</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <i class="fas fa-file-powerpoint"></i>
+                                <span>PowerPoint</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION SOFT SKILLS -->
+        <section id="soft-skills">
+            <div class="section-header">
+                <h2>Qualités Personnelles</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="soft-skills-grid">
+                <div class="soft-skill-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Rigueur</h3>
+                    <p>Attention méticuleuse aux détails et respect strict des procédures pour garantir la qualité.</p>
+                </div>
+                <div class="soft-skill-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Autonomie</h3>
+                    <p>Capacité à prendre des initiatives et gérer mes projets de manière indépendante.</p>
+                </div>
+                <div class="soft-skill-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Curiosité</h3>
+                    <p>Passion constante pour l'apprentissage et l'exploration de nouvelles technologies.</p>
+                </div>
+                <div class="soft-skill-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Esprit d'équipe</h3>
+                    <p>Collaboration efficace et communication claire au sein d'équipes multidisciplinaires.</p>
+                </div>
+                <div class="soft-skill-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <h3>Résolution de problèmes</h3>
+                    <p>Approche analytique pour identifier et résoudre des problèmes complexes rapidement.</p>
+                </div>
+                <div class="soft-skill-card">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Gestion du temps</h3>
+                    <p>Organisation efficace des tâches pour respecter les délais et optimiser la productivité.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION PROJETS -->
+        <section id="projets">
+            <div class="section-header">
+                <h2>Mes Projets</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-warehouse"></i>
+                    </div>
+                    <h3>Système de Gestion de Stock</h3>
+                    <p class="project-tech">Python • Flask • MySQL • HTML/CSS/JS</p>
+                    <p class="project-description">
+                        Application web complète permettant la gestion des inventaires, 
+                        le suivi des entrées/sorties, et la génération de rapports statistiques. 
+                        Interface intuitive avec tableau de bord analytics en temps réel.
+                    </p>
+                    <div class="project-features">
+                        <span class="feature-tag">Authentification</span>
+                        <span class="feature-tag">Base de données</span>
+                        <span class="feature-tag">Responsive</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Plateforme Web ENEAM</h3>
+                    <p class="project-tech">HTML5 • CSS3 • JavaScript • PHP</p>
+                    <p class="project-description">
+                        Portail web pour étudiants permettant la consultation des emplois du temps, 
+                        notes, et ressources pédagogiques. Système de notifications intégré et 
+                        espace de communication entre étudiants et enseignants.
+                    </p>
+                    <div class="project-features">
+                        <span class="feature-tag">Multi-utilisateurs</span>
+                        <span class="feature-tag">CMS</span>
+                        <span class="feature-tag">Notifications</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3>Infrastructure Réseau Local</h3>
+                    <p class="project-tech">Cisco Packet Tracer • VLAN • Routing</p>
+                    <p class="project-description">
+                        Conception et simulation d'un réseau local d'entreprise avec segmentation VLAN, 
+                        configuration de routeurs et switches, mise en place de protocoles de sécurité 
+                        et politique d'accès différenciée par département.
+                    </p>
+                    <div class="project-features">
+                        <span class="feature-tag">VLAN</span>
+                        <span class="feature-tag">Sécurité</span>
+                        <span class="feature-tag">QoS</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>Dashboard Analytics Python</h3>
+                    <p class="project-tech">Python • Pandas • Matplotlib • Tkinter</p>
+                    <p class="project-description">
+                        Application de bureau pour l'analyse et la visualisation de données. 
+                        Import de fichiers CSV/Excel, traitement de données, génération de 
+                        graphiques interactifs et export de rapports PDF automatisés.
+                    </p>
+                    <div class="project-features">
+                        <span class="feature-tag">Data Analysis</span>
+                        <span class="feature-tag">Visualisation</span>
+                        <span class="feature-tag">Export PDF</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Application Mobile Todo</h3>
+                    <p class="project-tech">React Native • Firebase • AsyncStorage</p>
+                    <p class="project-description">
+                        Application mobile de gestion de tâches avec synchronisation cloud, 
+                        notifications push, mode offline, et interface moderne. Gestion des 
+                        priorités et catégorisation des tâches.
+                    </p>
+                    <div class="project-features">
+                        <span class="feature-tag">Cross-platform</span>
+                        <span class="feature-tag">Cloud Sync</span>
+                        <span class="feature-tag">Notifications</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Serveur Web Linux</h3>
+                    <p class="project-tech">Ubuntu Server • Apache • SSL • Firewall</p>
+                    <p class="project-description">
+                        Configuration complète d'un serveur web sous Linux avec Apache, 
+                        certificats SSL, configuration de pare-feu UFW, automatisation des 
+                        sauvegardes et monitoring avec Nagios.
+                    </p>
+                    <div class="project-features">
+                        <span class="feature-tag">HTTPS</span>
+                        <span class="feature-tag">Monitoring</span>
+                        <span class="feature-tag">Backup</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION CV -->
+        <section id="cv">
+            <div class="section-header">
+                <h2>Mon Curriculum Vitae</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="cv-content">
+                <blockquote class="cv-quote">
+                    <i class="fas fa-quote-left"></i>
+                    <p>La réussite appartient à ceux qui se préparent aujourd'hui pour demain.</p>
+                    <i class="fas fa-quote-right"></i>
+                </blockquote>
+                
+                <div class="cv-actions">
+                    <a href="CV_Samson_Kpodamakou.pdf" download class="btn-download">
+                        <i class="fas fa-download"></i>
+                        Télécharger mon CV
+                    </a>
+                    <button class="btn-view" onclick="window.open('CV_Samson_Kpodamakou.pdf', '_blank')">
+                        <i class="fas fa-eye"></i>
+                        Consulter en ligne
+                    </button>
+                </div>
+
+                <div class="cv-summary">
+                    <h3>En résumé</h3>
+                    <div class="summary-grid">
+                        <div class="summary-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Licence Informatique de Gestion</span>
+                        </div>
+                        <div class="summary-item">
+                            <i class="fas fa-code"></i>
+                            <span>5+ langages de programmation</span>
+                        </div>
+                        <div class="summary-item">
+                            <i class="fas fa-project-diagram"></i>
+                            <span>6 projets majeurs réalisés</span>
+                        </div>
+                        <div class="summary-item">
+                            <i class="fas fa-certificate"></i>
+                            <span>Certifications réseau Cisco</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION CONTACT -->
+        <section id="contact">
+            <div class="section-header">
+                <h2>Contactez-moi</h2>
+                <div class="accent-line"></div>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Restons en contact</h3>
+                    <p class="contact-intro">
+                        Vous avez un projet en tête ou une opportunité professionnelle ? 
+                        N'hésitez pas à me contacter, je serais ravi d'échanger avec vous !
+                    </p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Email</h4>
+                                <a href="mailto:rogardossou@email.com">rogardossou@email.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Téléphone</h4>
+                                <a href="tel:+22901438380330">+229 01 43 83 80 30</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Localisation</h4>
+                                <p>Porto-Novo, Bénin</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/samson-kpodamakou" target="_blank" class="social-btn">
+                            <i class="fab fa-linkedin-in"></i>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="https://github.com/samsonkpodamakou" target="_blank" class="social-btn">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://twitter.com/samsonkpoda" target="_blank" class="social-btn">
+                            <i class="fab fa-twitter"></i>
+                            <span>Twitter</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="contact-form-wrapper">
+                    <button id="btn-contact" class="btn-show-form">
+                        <i class="fas fa-paper-plane"></i>
+                        Envoyer un message
+                    </button>
+                    
+                    <form id="form-contact">
+                        <div class="form-group">
+                            <label for="nom">
+                                <i class="fas fa-user"></i>
+                                Nom complet
+                            </label>
+                            <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">
+                                <i class="fas fa-envelope"></i>
+                                Adresse email
+                            </label>
+                            <input type="email" id="email" name="email" placeholder="votre.email@exemple.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sujet">
+                                <i class="fas fa-tag"></i>
+                                Sujet
+                            </label>
+                            <input type="text" id="sujet" name="sujet" placeholder="Objet de votre message" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">
+                                <i class="fas fa-comment"></i>
+                                Message
+                            </label>
+                            <textarea id="message" name="message" rows="6" placeholder="Votre message..." required></textarea>
+                        </div>
+
+                        <button type="submit" id="envoyer" class="btn-submit">
+                            <i class="fas fa-paper-plane"></i>
+                            Envoyer le message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer id="footer">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Samson Kpodamakou</h3>
+                    <p>Développeur Web & Mobile | Futur expert en Cybersécurité</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Navigation</h4>
+                        <ul>
+                            <li><a href="#apropos">À propos</a></li>
+                            <li><a href="#competences-techniques">Compétences</a></li>
+                            <li><a href="#projets">Projets</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>Réseaux sociaux</h4>
+                        <ul>
+                            <li><a href="https://www.linkedin.com/in/samson-kpodamakou-54ab263a9 " target="_blank">LinkedIn</a></li>
+                            <li><a href="https://github.com/samsonkpodamakou" target="_blank">GitHub</a></li>
+                            <li><a href="https://twitter.com/samsonkpoda" target="_blank">Twitter</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Samson Kpodamakou. Tous droits réservés.</p>
+                <p class="made-with">Fait avec <i class="fas fa-heart"></i> et beaucoup de café</p>
+            </div>
+        </footer>
+
+        <!-- Bouton retour en haut -->
+        <button id="scroll-top" class="scroll-top-btn">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+   </div>
+
+   <script type="module" src="folio.js"></script>
+
+</body>
+</html>
